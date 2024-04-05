@@ -17,6 +17,8 @@
     </head>
     <body>
 
+        {{> _header}}
+
         <div class='container'>{{{body}}}</div>
 
         <!-- Compiled and minified JavaScript -->
@@ -28,5 +30,9 @@
             src='https://kit.fontawesome.com/1a28613309.js'
             crossorigin='anonymous'
         ></script>
+
+        <script>
+            M.Sidenav.init(document.querySelector('.sidenav'))
+        </script>
     </body>
 </html>
