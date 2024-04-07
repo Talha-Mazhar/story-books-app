@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 //handlebars helpers
-const { formatDate } = require('./helpers/hbs')
+const { formatDate, stripTags, truncate, editIcon } = require('./helpers/hbs')
 
 //Set handlebars Middleware
 // Configure Handlebars
@@ -38,6 +38,9 @@ const hbs = handlebars.create({
     partialsDir: path.join(__dirname, 'views/partials'), // Use path.join for dynamic resolution
     helpers: {
         formatDate,
+        stripTags,
+        truncate,
+        editIcon,
     },
 })
 app.engine('handlebars', hbs.engine)
@@ -56,6 +59,12 @@ app.use(
 // Passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
+
+//set global variable
+app.use(function (req, res, next) {
+    res.locals.user = req.user || null
+    next()
+})
 
 //Static folder
 app.use(express.static(path.join(__dirname, 'public')))
