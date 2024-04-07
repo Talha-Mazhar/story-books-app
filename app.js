@@ -27,6 +27,9 @@ if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'))
 }
 
+//handlebars helpers
+const { formatDate } = require('./helpers/hbs')
+
 //Set handlebars Middleware
 // Configure Handlebars
 const hbs = handlebars.create({
@@ -34,7 +37,7 @@ const hbs = handlebars.create({
     layoutsDir: path.join(__dirname, 'views/layouts'), // Use path.join for dynamic resolution
     partialsDir: path.join(__dirname, 'views/partials'), // Use path.join for dynamic resolution
     helpers: {
-        // Add your custom Handlebars helpers here (optional)
+        formatDate,
     },
 })
 app.engine('handlebars', hbs.engine)
